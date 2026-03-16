@@ -302,9 +302,15 @@ function flipInvite() {
   if (card.classList.contains('flipped')) return;
   card.classList.add('flipped');
   setTimeout(() => {
+    // Temporarily disable scroll-snap so scrollIntoView works on mobile
+    document.documentElement.style.scrollSnapType = 'none';
     document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth' });
+    // Re-enable snap after scroll completes
+    setTimeout(() => {
+      document.documentElement.style.scrollSnapType = 'y mandatory';
+    }, 1200);
   }, 1000);
-  setTimeout(() => { card.classList.remove('flipped'); }, 2500);
+  setTimeout(() => { card.classList.remove('flipped'); }, 3000);
 }
 const fadeSections = document.querySelectorAll('.fade-section');
 const observer = new IntersectionObserver((entries) => {
