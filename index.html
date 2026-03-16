@@ -98,6 +98,24 @@ body { font-family: 'Special Elite', cursive !important; }
 .invite-card { animation: floatCard 6s ease-in-out infinite; }
 .invite-card.flipped { animation: none; }
 
+/* Scalloped stamp edge */
+.scalloped-border {
+  --s: 18px; /* scallop size */
+  --c: #f2c91d; /* yellow color */
+  padding: var(--s);
+  background: var(--c);
+  -webkit-mask:
+    radial-gradient(circle at 50% 0, transparent calc(var(--s)*0.7), #000 calc(var(--s)*0.7 + 1px)) calc(var(--s)*-1) 0 / calc(var(--s)*2) 51% repeat-x,
+    radial-gradient(circle at 50% 100%, transparent calc(var(--s)*0.7), #000 calc(var(--s)*0.7 + 1px)) calc(var(--s)*-1) 100% / calc(var(--s)*2) 51% repeat-x,
+    radial-gradient(circle at 0 50%, transparent calc(var(--s)*0.7), #000 calc(var(--s)*0.7 + 1px)) 0 calc(var(--s)*-1) / 51% calc(var(--s)*2) repeat-y,
+    radial-gradient(circle at 100% 50%, transparent calc(var(--s)*0.7), #000 calc(var(--s)*0.7 + 1px)) 100% calc(var(--s)*-1) / 51% calc(var(--s)*2) repeat-y;
+  mask:
+    radial-gradient(circle at 50% 0, transparent calc(var(--s)*0.7), #000 calc(var(--s)*0.7 + 1px)) calc(var(--s)*-1) 0 / calc(var(--s)*2) 51% repeat-x,
+    radial-gradient(circle at 50% 100%, transparent calc(var(--s)*0.7), #000 calc(var(--s)*0.7 + 1px)) calc(var(--s)*-1) 100% / calc(var(--s)*2) 51% repeat-x,
+    radial-gradient(circle at 0 50%, transparent calc(var(--s)*0.7), #000 calc(var(--s)*0.7 + 1px)) 0 calc(var(--s)*-1) / 51% calc(var(--s)*2) repeat-y,
+    radial-gradient(circle at 100% 50%, transparent calc(var(--s)*0.7), #000 calc(var(--s)*0.7 + 1px)) 100% calc(var(--s)*-1) / 51% calc(var(--s)*2) repeat-y;
+}
+
 .wave-bg {
   background-color: #d1e3ed;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='40'%3E%3Cpath d='M0 20 Q10 10 20 20 Q30 30 40 20 Q50 10 60 20 Q70 30 80 20 Q90 10 100 20 Q110 30 120 20 Q130 10 140 20 Q150 30 160 20 Q170 10 180 20 Q190 30 200 20 Q210 10 220 20 Q230 30 240 20 Q250 10 260 20 Q270 30 280 20 Q290 10 300 20 Q310 30 320 20 Q330 10 340 20 Q350 30 360 20 Q370 10 380 20 Q390 30 400 20' fill='none' stroke='%23b8d4e3' stroke-width='2' opacity='0.5'/%3E%3C/svg%3E");
@@ -212,46 +230,48 @@ body { font-family: 'Special Elite', cursive !important; }
   <div class="max-w-xl mx-auto px-4">
     <h2 class="font-cursive text-party-pink text-3xl md:text-4xl text-center mb-4">rsvp</h2>
     <p class="font-body text-center text-party-red mb-10 tracking-wider">Secure your spot by the pool &#127754;</p>
-    <div class="bg-party-yellow/90 rounded-2xl p-3 md:p-4">
-      <div class="relative bg-party-cream rounded-xl p-6 md:p-8">
-        <!-- REPLACE WITH YOUR FORMSPREE ENDPOINT -->
-        <form id="rsvp-form" action="https://formspree.io/f/your-id" method="POST" class="space-y-5">
+    <div class="relative max-w-md mx-auto">
+      <!-- Invite background image -->
+      <img src="rsvp-bg.png" alt="" class="w-full" aria-hidden="true">
+      <!-- Form overlay positioned on top of the image -->
+      <div class="absolute inset-0 flex items-center justify-center px-8 md:px-12 pt-16 pb-12">
+        <form id="rsvp-form" action="https://formspree.io/f/your-id" method="POST" class="w-full space-y-3 overflow-y-auto max-h-full">
           <div>
-            <label for="name" class="block font-body text-sm tracking-[0.15em] text-party-red mb-1">FULL NAME *</label>
-            <input type="text" id="name" name="name" required placeholder="Your gorgeous name" class="w-full px-4 py-3 rounded-xl border-2 border-party-blue/50 focus:border-party-pink focus:outline-none font-body text-sm bg-white transition-colors">
+            <label for="name" class="block font-body text-xs tracking-[0.15em] text-party-red mb-1">FULL NAME *</label>
+            <input type="text" id="name" name="name" required placeholder="Your gorgeous name" class="w-full px-3 py-2 rounded-lg border border-party-red/30 focus:border-party-pink focus:outline-none font-body text-xs bg-white/80 transition-colors">
           </div>
           <div>
-            <label for="email" class="block font-body text-sm tracking-[0.15em] text-party-red mb-1">EMAIL *</label>
-            <input type="email" id="email" name="email" required placeholder="you@email.com" class="w-full px-4 py-3 rounded-xl border-2 border-party-blue/50 focus:border-party-pink focus:outline-none font-body text-sm bg-white transition-colors">
+            <label for="email" class="block font-body text-xs tracking-[0.15em] text-party-red mb-1">EMAIL *</label>
+            <input type="email" id="email" name="email" required placeholder="you@email.com" class="w-full px-3 py-2 rounded-lg border border-party-red/30 focus:border-party-pink focus:outline-none font-body text-xs bg-white/80 transition-colors">
           </div>
           <div>
-            <label for="phone" class="block font-body text-sm tracking-[0.15em] text-party-red mb-1">PHONE <span class="text-gray-400">(optional)</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" class="w-full px-4 py-3 rounded-xl border-2 border-party-blue/50 focus:border-party-pink focus:outline-none font-body text-sm bg-white transition-colors">
+            <label for="phone" class="block font-body text-xs tracking-[0.15em] text-party-red mb-1">PHONE <span class="text-gray-400">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" class="w-full px-3 py-2 rounded-lg border border-party-red/30 focus:border-party-pink focus:outline-none font-body text-xs bg-white/80 transition-colors">
           </div>
           <div>
-            <label class="block font-body text-sm tracking-[0.15em] text-party-red mb-2">ATTENDING? *</label>
-            <div class="flex gap-3 flex-wrap">
-              <label class="flex-1 min-w-[90px]">
+            <label class="block font-body text-xs tracking-[0.15em] text-party-red mb-1">ATTENDING? *</label>
+            <div class="flex gap-2">
+              <label class="flex-1">
                 <input type="radio" name="attending" value="yes" required class="peer hidden">
-                <div class="peer-checked:bg-party-pink peer-checked:text-white peer-checked:border-party-pink text-center py-3 px-4 rounded-xl border-2 border-party-blue/50 font-body text-sm cursor-pointer hover:border-party-pink transition-all">Yes! &#127881;</div>
+                <div class="peer-checked:bg-party-pink peer-checked:text-white peer-checked:border-party-pink text-center py-2 rounded-lg border border-party-red/30 font-body text-xs cursor-pointer hover:border-party-pink transition-all">Yes!</div>
               </label>
-              <label class="flex-1 min-w-[90px]">
+              <label class="flex-1">
                 <input type="radio" name="attending" value="no" class="peer hidden">
-                <div class="peer-checked:bg-party-red peer-checked:text-white peer-checked:border-party-red text-center py-3 px-4 rounded-xl border-2 border-party-blue/50 font-body text-sm cursor-pointer hover:border-party-red transition-all">No &#128546;</div>
+                <div class="peer-checked:bg-party-red peer-checked:text-white peer-checked:border-party-red text-center py-2 rounded-lg border border-party-red/30 font-body text-xs cursor-pointer hover:border-party-red transition-all">No</div>
               </label>
-              <label class="flex-1 min-w-[90px]">
+              <label class="flex-1">
                 <input type="radio" name="attending" value="maybe" class="peer hidden">
-                <div class="peer-checked:bg-party-yellow peer-checked:text-white peer-checked:border-party-yellow text-center py-3 px-4 rounded-xl border-2 border-party-blue/50 font-body text-sm cursor-pointer hover:border-party-yellow transition-all">Maybe &#129300;</div>
+                <div class="peer-checked:bg-party-yellow peer-checked:text-white peer-checked:border-party-yellow text-center py-2 rounded-lg border border-party-red/30 font-body text-xs cursor-pointer hover:border-party-yellow transition-all">Maybe</div>
               </label>
             </div>
           </div>
           <div>
-            <label for="notes" class="block font-body text-sm tracking-[0.15em] text-party-red mb-1">DIETARY RESTRICTIONS / NOTES</label>
-            <textarea id="notes" name="notes" rows="3" placeholder="Allergies, food prefs, or just say hi" class="w-full px-4 py-3 rounded-xl border-2 border-party-blue/50 focus:border-party-pink focus:outline-none font-body text-sm bg-white transition-colors resize-none"></textarea>
+            <label for="notes" class="block font-body text-xs tracking-[0.15em] text-party-red mb-1">NOTES</label>
+            <textarea id="notes" name="notes" rows="2" placeholder="Allergies, food prefs, or just say hi" class="w-full px-3 py-2 rounded-lg border border-party-red/30 focus:border-party-pink focus:outline-none font-body text-xs bg-white/80 transition-colors resize-none"></textarea>
           </div>
-          <button type="submit" id="submit-btn" class="btn-shimmer w-full py-4 bg-gradient-to-r from-party-pink to-party-red text-white font-body tracking-[0.3em] text-sm rounded-xl hover:from-party-red hover:to-party-pink transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Submit RSVP">
-            <span id="btn-text">SEND IT &#127881;</span>
-            <span id="btn-loading" class="hidden">SENDING... &#10024;</span>
+          <button type="submit" id="submit-btn" class="btn-shimmer w-full py-3 bg-gradient-to-r from-party-pink to-party-red text-white font-body tracking-[0.3em] text-xs rounded-lg hover:from-party-red hover:to-party-pink transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed" aria-label="Submit RSVP">
+            <span id="btn-text">SEND IT</span>
+            <span id="btn-loading" class="hidden">SENDING...</span>
           </button>
         </form>
       </div>
