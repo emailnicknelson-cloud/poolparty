@@ -53,18 +53,28 @@ tailwind.config = {
   font-display: swap;
   src: url(https://fonts.gstatic.com/s/specialelite/v20/XLYgIZbkc4JPUL5CVArUVL0nhnc.ttf) format('truetype');
 }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
 body { font-family: 'Special Elite', cursive !important; }
 
-/* Wavy stamp background using SVG mask on the outer frame */
-.stamp-frame {
-  position: relative;
-  display: inline-block;
+/* Scroll snap sections */
+.snap-section { scroll-snap-align: start; scroll-snap-stop: always; }
+
+/* 3D Flip Card */
+.flip-card { perspective: 1200px; cursor: pointer; }
+.flip-card-inner {
+  position: relative; width: 100%; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
 }
-.stamp-frame-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back {
+  width: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.flip-card-back {
+  position: absolute; top: 0; left: 0; transform: rotateY(180deg);
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  background: linear-gradient(135deg, #fdf8f0 0%, #fff 100%);
+  border-radius: 0.5rem; min-height: 100%;
+  box-shadow: 0 25px 50px -12px rgba(255,31,169,0.2);
 }
 
 @keyframes floatCard {
@@ -86,6 +96,7 @@ body { font-family: 'Special Elite', cursive !important; }
 }
 .fade-section.visible { opacity: 1; transform: translateY(0) scale(1); }
 .invite-card { animation: floatCard 6s ease-in-out infinite; }
+.invite-card.flipped { animation: none; }
 
 .wave-bg {
   background-color: #d1e3ed;
@@ -109,7 +120,7 @@ body { font-family: 'Special Elite', cursive !important; }
 ::-webkit-scrollbar-thumb:hover { background: #ff5757; }
 </style>
 </head>
-<body class="bg-party-blue text-gray-800 overflow-x-hidden">
+<body class="bg-party-blue text-gray-800 overflow-x-hidden" style="overflow-y: scroll;">
 
 <!-- NAVBAR -->
 <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-party-cream/90 backdrop-blur-md shadow-sm">
@@ -130,7 +141,7 @@ body { font-family: 'Special Elite', cursive !important; }
 </nav>
 
 <!-- HERO -->
-<section class="relative min-h-screen flex items-center justify-center wave-bg pt-20 pb-12 overflow-hidden">
+<section id="hero" class="relative min-h-screen flex items-center justify-center wave-bg pt-20 pb-12 overflow-hidden snap-section">
   <!-- Animated wave pattern overlay -->
   <div class="absolute inset-0 opacity-30 pointer-events-none" aria-hidden="true">
     <svg class="absolute bottom-0 w-[200%]" style="animation: waveMove 12s linear infinite;" viewBox="0 0 1440 120" fill="none">
@@ -141,9 +152,20 @@ body { font-family: 'Special Elite', cursive !important; }
     </svg>
   </div>
 
-  <!-- The Invite Image -->
-  <div class="relative z-10 px-4 w-full max-w-lg mx-auto invite-card">
-    <img src="invite.png" alt="Girls Just Wanna Have Sun - Pool Party Invite - May 22, 2026 at 1:00PM - 19411 Camden Ave, Elkhorn 68022 - RSVP by May 17" class="w-full rounded-lg shadow-2xl shadow-party-pink/20">
+  <!-- The Invite - Flip Card -->
+  <div class="relative z-10 px-4 w-full max-w-lg mx-auto invite-card flip-card" id="invite-flip" onclick="flipInvite()">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <img src="invite.png" alt="Girls Just Wanna Have Sun - Pool Party Invite" class="w-full rounded-lg shadow-2xl shadow-party-pink/20">
+        <p class="text-center text-party-red/60 font-body text-xs mt-3 tracking-wider">&#9757; tap to flip</p>
+      </div>
+      <div class="flip-card-back p-8">
+        <div class="text-6xl mb-4">&#127946;&#8205;&#9792;&#65039;</div>
+        <h3 class="font-cursive text-party-pink text-2xl md:text-3xl mb-3">you're invited!</h3>
+        <p class="font-body text-gray-600 tracking-wider mb-6 text-center">come splash with us &#127754;</p>
+        <a href="#rsvp" class="bg-gradient-to-r from-party-pink to-party-red text-white font-body tracking-[0.2em] text-sm px-8 py-3 rounded-full shadow-lg hover:shadow-party-pink/40 transition-all">RSVP NOW &#10024;</a>
+      </div>
+    </div>
   </div>
 
   <!-- Scroll indicator -->
@@ -153,7 +175,7 @@ body { font-family: 'Special Elite', cursive !important; }
 </section>
 
 <!-- EVENT DETAILS -->
-<section id="details" class="py-20 bg-party-cream fade-section">
+<section id="details" class="py-20 bg-party-cream fade-section snap-section">
   <div class="max-w-4xl mx-auto px-4">
     <h2 class="font-cursive text-party-red text-3xl md:text-4xl text-center mb-12">the details</h2>
     <div class="grid md:grid-cols-3 gap-6">
@@ -186,7 +208,7 @@ body { font-family: 'Special Elite', cursive !important; }
 
 
 <!-- RSVP FORM -->
-<section id="rsvp" class="py-20 wave-bg fade-section">
+<section id="rsvp" class="py-20 wave-bg fade-section snap-section">
   <div class="max-w-xl mx-auto px-4">
     <h2 class="font-cursive text-party-pink text-3xl md:text-4xl text-center mb-4">rsvp</h2>
     <p class="font-body text-center text-party-red mb-10 tracking-wider">Secure your spot by the pool &#127754;</p>
@@ -274,6 +296,16 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => { mobileMenu.classList.add('hidden'); hamburger.innerHTML = '&#9776;'; });
 });
 
+// Invite flip logic
+function flipInvite() {
+  const card = document.getElementById('invite-flip');
+  if (card.classList.contains('flipped')) return;
+  card.classList.add('flipped');
+  setTimeout(() => {
+    document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth' });
+  }, 1000);
+  setTimeout(() => { card.classList.remove('flipped'); }, 2500);
+}
 const fadeSections = document.querySelectorAll('.fade-section');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
