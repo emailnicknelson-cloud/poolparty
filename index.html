@@ -361,7 +361,16 @@
 
 
   <!-- RSVP FORM -->
-  <section id="rsvp" class="py-20 wave-bg fade-section snap-section">
+  <section id="rsvp" class="relative py-20 wave-bg fade-section snap-section overflow-hidden">
+    <!-- Animated wave pattern overlay -->
+    <div class="absolute inset-0 opacity-30 pointer-events-none" aria-hidden="true">
+      <svg class="absolute bottom-0 w-[200%]" style="animation: waveMove 12s linear infinite;" viewBox="0 0 1440 120" fill="none">
+        <path d="M0 60 Q60 20 120 60 Q180 100 240 60 Q300 20 360 60 Q420 100 480 60 Q540 20 600 60 Q660 100 720 60 Q780 20 840 60 Q900 100 960 60 Q1020 20 1080 60 Q1140 100 1200 60 Q1260 20 1320 60 Q1380 100 1440 60" stroke="#a8c8db" stroke-width="2" fill="none"/>
+      </svg>
+      <svg class="absolute bottom-10 w-[200%]" style="animation: waveMove 15s linear infinite reverse;" viewBox="0 0 1440 120" fill="none">
+        <path d="M0 60 Q60 30 120 60 Q180 90 240 60 Q300 30 360 60 Q420 90 480 60 Q540 30 600 60 Q660 90 720 60 Q780 30 840 60 Q900 90 960 60 Q1020 30 1080 60 Q1140 90 1200 60 Q1260 30 1320 60 Q1380 90 1440 60" stroke="#b8d4e3" stroke-width="1.5" fill="none"/>
+      </svg>
+    </div>
     <div class="max-w-xl mx-auto px-4">
       <h2 class="font-cursive text-party-pink text-3xl md:text-4xl text-center mb-4">rsvp</h2>
       <p class="font-body text-center text-party-red mb-10 tracking-wider">Secure your spot by the pool &#127754;</p>
