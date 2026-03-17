@@ -73,6 +73,29 @@
       scroll-snap-stop: always;
     }
 
+    /* RSVP form overlay - mobile adjustments */
+    @media (max-width: 640px) {
+      .rsvp-form-overlay {
+        top: 25% !important;
+        left: 18% !important;
+        right: 18% !important;
+        bottom: 18% !important;
+      }
+      .rsvp-form-overlay input,
+      .rsvp-form-overlay textarea {
+        padding: 4px 6px !important;
+        font-size: 10px !important;
+      }
+      .rsvp-form-overlay label {
+        font-size: 9px !important;
+        margin-bottom: 1px !important;
+      }
+      .rsvp-form-overlay button[type="submit"] {
+        padding: 5px !important;
+        font-size: 10px !important;
+      }
+    }
+
     /* 3D Flip Card */
     .flip-card {
       perspective: 1200px;
@@ -382,7 +405,7 @@
       <p class="font-body text-center text-party-red mb-10 tracking-wider">Secure your spot by the pool &#127754;</p>
       <div class="relative max-w-lg mx-auto invite-card">
         <img src="rsvp-bg.png" alt="" class="w-full h-auto block" aria-hidden="true">
-        <div class="absolute overflow-y-auto" style="top: 27%; left: 22%; right: 22%; bottom: 24%;">
+        <div class="absolute overflow-y-auto rsvp-form-overlay" style="top: 27%; left: 22%; right: 22%; bottom: 24%;">
           <form id="rsvp-form" action="https://formspree.io/f/xjgaaddl" method="POST" class="space-y-1">
             <div>
               <label for="name" class="block font-body text-[11px] tracking-[0.12em] text-party-red mb-0.5">FULL NAME *</label>
