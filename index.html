@@ -482,6 +482,21 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     fadeSections.forEach(section => observer.observe(section));
 
+    // Disable scroll-snap while filling out the RSVP form (fixes mobile keyboard issues)
+    document.querySelectorAll('#rsvp-form input, #rsvp-form textarea').forEach(el => {
+      el.addEventListener('focus', () => {
+        document.documentElement.style.scrollSnapType = 'none';
+      });
+      el.addEventListener('blur', () => {
+        setTimeout(() => {
+          // Only re-enable if no other input is focused
+          if (!document.activeElement || !document.activeElement.closest('#rsvp-form')) {
+            document.documentElement.style.scrollSnapType = 'y mandatory';
+          }
+        }, 500);
+      });
+    });
+
     const rsvpSection = document.getElementById('rsvp');
     const mobilePill = document.getElementById('mobile-rsvp-pill');
     const pillObserver = new IntersectionObserver((entries) => {
