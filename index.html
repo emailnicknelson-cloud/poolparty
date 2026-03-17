@@ -380,57 +380,40 @@
     <div class="max-w-4xl mx-auto px-4">
       <h2 class="font-cursive text-party-pink text-3xl md:text-4xl text-center mb-4">rsvp</h2>
       <p class="font-body text-center text-party-red mb-10 tracking-wider">Secure your spot by the pool &#127754;</p>
-      <div class="max-w-5xl mx-auto invite-card"
-        style="background-image: url('rsvp-bg.png'); background-size: 100% 100%; background-repeat: no-repeat; padding: 42% 26% 48% 26%;">
-        <form id="rsvp-form" action="https://formspree.io/f/xjgaaddl" method="POST" class="space-y-4">
-          <div>
-            <label for="name" class="block font-body text-xs tracking-[0.12em] text-party-red mb-1">FULL NAME *</label>
-            <input type="text" id="name" name="name" required placeholder="Your gorgeous name"
-              class="w-full px-3 py-2.5 rounded-lg border border-party-red/25 focus:border-party-pink focus:outline-none font-body text-sm bg-white/50 transition-colors">
-          </div>
-          <div>
-            <label for="email" class="block font-body text-xs tracking-[0.12em] text-party-red mb-1">EMAIL *</label>
-            <input type="email" id="email" name="email" required placeholder="you@email.com"
-              class="w-full px-3 py-2.5 rounded-lg border border-party-red/25 focus:border-party-pink focus:outline-none font-body text-sm bg-white/50 transition-colors">
-          </div>
-          <div>
-            <label for="phone" class="block font-body text-xs tracking-[0.12em] text-party-red mb-1">PHONE <span
-                class="text-gray-400">(optional)</span></label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567"
-              class="w-full px-3 py-2.5 rounded-lg border border-party-red/25 focus:border-party-pink focus:outline-none font-body text-sm bg-white/50 transition-colors">
-          </div>
-          <div>
-            <label class="block font-body text-xs tracking-[0.12em] text-party-red mb-1">ATTENDING? *</label>
-            <div class="flex gap-2">
-              <label class="flex-1"><input type="radio" name="attending" value="yes" required class="peer hidden">
-                <div
-                  class="peer-checked:bg-party-pink peer-checked:text-white peer-checked:border-party-pink text-center py-2.5 rounded-lg border border-party-red/25 font-body text-sm cursor-pointer hover:border-party-pink transition-all">
-                  Yes!</div>
-              </label>
-              <label class="flex-1"><input type="radio" name="attending" value="no" class="peer hidden">
-                <div
-                  class="peer-checked:bg-party-red peer-checked:text-white peer-checked:border-party-red text-center py-2.5 rounded-lg border border-party-red/25 font-body text-sm cursor-pointer hover:border-party-red transition-all">
-                  No</div>
-              </label>
-              <label class="flex-1"><input type="radio" name="attending" value="maybe" class="peer hidden">
-                <div
-                  class="peer-checked:bg-party-yellow peer-checked:text-white peer-checked:border-party-yellow text-center py-2.5 rounded-lg border border-party-red/25 font-body text-sm cursor-pointer hover:border-party-yellow transition-all">
-                  Maybe</div>
-              </label>
+      <div class="relative max-w-lg mx-auto invite-card">
+        <img src="rsvp-bg.png" alt="" class="w-full h-auto block" aria-hidden="true">
+        <div class="absolute overflow-y-auto" style="top: 24%; left: 16%; right: 14%; bottom: 18%;">
+          <form id="rsvp-form" action="https://formspree.io/f/xjgaaddl" method="POST" class="space-y-2">
+            <div>
+              <label for="name" class="block font-body text-[11px] tracking-[0.12em] text-party-red mb-0.5">FULL NAME *</label>
+              <input type="text" id="name" name="name" required placeholder="Your gorgeous name" class="w-full px-2 py-1.5 rounded-md border border-party-red/20 focus:border-party-pink focus:outline-none font-body text-xs bg-transparent transition-colors">
             </div>
-          </div>
-          <div>
-            <label for="notes" class="block font-body text-xs tracking-[0.12em] text-party-red mb-1">NOTES</label>
-            <textarea id="notes" name="notes" rows="2" placeholder="Allergies, food prefs, or just say hi"
-              class="w-full px-3 py-2.5 rounded-lg border border-party-red/25 focus:border-party-pink focus:outline-none font-body text-sm bg-white/50 transition-colors resize-none"></textarea>
-          </div>
-          <button type="submit" id="submit-btn"
-            class="btn-shimmer w-full py-3 bg-gradient-to-r from-party-pink to-party-red text-white font-body tracking-[0.3em] text-sm rounded-lg hover:from-party-red hover:to-party-pink transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
-            aria-label="Submit RSVP">
-            <span id="btn-text">SEND IT</span>
-            <span id="btn-loading" class="hidden">SENDING...</span>
-          </button>
-        </form>
+            <div>
+              <label for="email" class="block font-body text-[11px] tracking-[0.12em] text-party-red mb-0.5">EMAIL *</label>
+              <input type="email" id="email" name="email" required placeholder="you@email.com" class="w-full px-2 py-1.5 rounded-md border border-party-red/20 focus:border-party-pink focus:outline-none font-body text-xs bg-transparent transition-colors">
+            </div>
+            <div>
+              <label for="phone" class="block font-body text-[11px] tracking-[0.12em] text-party-red mb-0.5">PHONE <span class="text-gray-400">(optional)</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" class="w-full px-2 py-1.5 rounded-md border border-party-red/20 focus:border-party-pink focus:outline-none font-body text-xs bg-transparent transition-colors">
+            </div>
+            <div>
+              <label class="block font-body text-[11px] tracking-[0.12em] text-party-red mb-0.5">ATTENDING? *</label>
+              <div class="flex gap-1.5">
+                <label class="flex-1"><input type="radio" name="attending" value="yes" required class="peer hidden"><div class="peer-checked:bg-party-pink peer-checked:text-white peer-checked:border-party-pink text-center py-1.5 rounded-md border border-party-red/20 font-body text-xs cursor-pointer hover:border-party-pink transition-all">Yes!</div></label>
+                <label class="flex-1"><input type="radio" name="attending" value="no" class="peer hidden"><div class="peer-checked:bg-party-red peer-checked:text-white peer-checked:border-party-red text-center py-1.5 rounded-md border border-party-red/20 font-body text-xs cursor-pointer hover:border-party-red transition-all">No</div></label>
+                <label class="flex-1"><input type="radio" name="attending" value="maybe" class="peer hidden"><div class="peer-checked:bg-party-yellow peer-checked:text-white peer-checked:border-party-yellow text-center py-1.5 rounded-md border border-party-red/20 font-body text-xs cursor-pointer hover:border-party-yellow transition-all">Maybe</div></label>
+              </div>
+            </div>
+            <div>
+              <label for="notes" class="block font-body text-[11px] tracking-[0.12em] text-party-red mb-0.5">NOTES</label>
+              <textarea id="notes" name="notes" rows="2" placeholder="Allergies, food prefs, or just say hi" class="w-full px-2 py-1.5 rounded-md border border-party-red/20 focus:border-party-pink focus:outline-none font-body text-xs bg-transparent transition-colors resize-none"></textarea>
+            </div>
+            <button type="submit" id="submit-btn" class="btn-shimmer w-full py-2 bg-gradient-to-r from-party-pink to-party-red text-white font-body tracking-[0.2em] text-xs rounded-md hover:from-party-red hover:to-party-pink transition-all duration-300" aria-label="Submit RSVP">
+              <span id="btn-text">SEND IT</span>
+              <span id="btn-loading" class="hidden">SENDING...</span>
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </section>
