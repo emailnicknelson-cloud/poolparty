@@ -414,7 +414,11 @@
       <div class="relative max-w-lg mx-auto invite-card">
         <img src="rsvp-bg.png" alt="" class="w-full h-auto block" aria-hidden="true">
         <div class="absolute overflow-y-auto rsvp-form-overlay" style="top: 27%; left: 22%; right: 22%; bottom: 24%;">
-          <form id="rsvp-form" action="https://formspree.io/f/xjgaaddl" method="POST" class="space-y-1">
+          <form id="rsvp-form" action="https://formsubmit.co/teel@whisperworkshop.com" method="POST" class="space-y-1">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New RSVP for Taylor's Pool Party!">
+            <input type="hidden" name="_next" value="https://www.taylorspoolparty2026.com/#rsvp">
+            <input type="hidden" name="_template" value="box">
             <div>
               <label for="name" class="block font-body text-[11px] tracking-[0.12em] text-party-red mb-0.5">FULL NAME *</label>
               <input type="text" id="name" name="name" required placeholder="Your gorgeous name" class="w-full px-2 py-1.5 rounded-md border border-party-red/20 focus:border-party-pink focus:outline-none font-body text-xs bg-transparent transition-colors">
